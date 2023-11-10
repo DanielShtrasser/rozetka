@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614524056927",
+    "project_id": "react-native-2d640",
+    "storage_bucket": "react-native-2d640.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614524056927:android:e3e17e1880ce10f30632ea",
+        "android_client_info": {
+          "package_name": "com.daniilliinaddaniil.rozetkanative"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfBkltrwWTyzCH8p00WNHVMChcZts-u98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

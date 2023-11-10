@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "BAIKAL BATTERY",
+    "slug": "rozetkanative",
+    "version": "2.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff",
+      "dark": {
+        "image": "./assets/splash_dark.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#000"
+      }
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.daniilliinaddaniil.rozetkanative",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses camera to read qrcode"
+      },
+      "buildNumber": "2"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.daniilliinaddaniil.rozetkanative",
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_CAMERA"
+      ],
+      "versionCode": 4
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fa5b380e-b7aa-4bc3-b965-41afc386da32"
+      }
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
+          "enableCodeScanner": true
+        }
+      ],
+      "expo-localization"
+    ]
+  }
+}
