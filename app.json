@@ -38,7 +38,7 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_CAMERA"
       ],
-      "versionCode": 4
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/favicon.png"
