@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { TouchableOpacity, Modal, View, Platform } from "react-native";
+import {
+  TouchableOpacity,
+  Modal,
+  View,
+  Platform,
+  Appearance,
+  StatusBar,
+} from "react-native";
 import { YaMap, Marker, Animation, Polyline } from "react-native-yamap";
 import { useTheme } from "@react-navigation/native";
 import Geolocation from "react-native-geolocation-service";
@@ -12,7 +19,6 @@ import QRCScanner from "../components/QRCScanner";
 
 import MapControls from "../components/MapControls";
 import getStationsSortedByDistance from "../utils/getStationsSortedByDistance";
-import getAllRoutePoints from "../utils/getAllRoutePoints";
 
 YaMap.init("f10be001-cb33-49b8-9804-f671fe90380e");
 
@@ -27,6 +33,7 @@ export default function MapScreen({ navigation }) {
   const [currentPosition, setCurrentPosition] = useState(false);
   const [scanedData, setScanedData] = useState(null);
   const [scanning, setScanning] = useState(false);
+  let theme = Appearance.getColorScheme();
 
   useEffect(() => {
     if (scanedData) {
@@ -119,7 +126,7 @@ export default function MapScreen({ navigation }) {
         Geolocation.getCurrentPosition(
           (position) => {
             setCurrentPosition(position);
-            setUserVisible(true);
+            setTimeout(() => setUserVisible(true), 500);
             map.current.setCenter({
               lat: position.coords.latitude,
               lon: position.coords.longitude,
@@ -153,7 +160,7 @@ export default function MapScreen({ navigation }) {
 
   useEffect(() => {
     getLocation();
-    setStnVisible(true);
+    setTimeout(() => setStnVisible(true), 1000);
   }, []);
 
   function makeRoute() {
@@ -192,6 +199,15 @@ export default function MapScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "light" ? "dark-content" : "light-content"}
+      />
+
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "light" ? "dark-content" : "light-content"}
+      />
       <Modal
         animationType="slide"
         transparent={false}
@@ -264,13 +280,3 @@ export default function MapScreen({ navigation }) {
     </View>
   );
 }
-
-/*
-lat: 52.2142,
-lon: 104.2661,
-
-lat: 52.2,
-lon: 104.2662,
-
-
-*/

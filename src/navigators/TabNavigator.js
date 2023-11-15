@@ -5,7 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 
-import MainScreen from "../screens/MainScreen";
+import InfoScreen from "../screens/InfoScreen";
 import MapStackNavigator from "./MapStackNavigator";
 import ChargingScreen from "../screens/ChargingScreen";
 import ProfileStackNavigator from "../navigators/ProfileStackNavigator";
@@ -49,7 +49,7 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       id="TabNavigator"
-      initialRouteName={"Главная"}
+      initialRouteName={"MapStackNavigator"}
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
@@ -59,10 +59,10 @@ export default function TabNavigator() {
       })}
     >
       <Tab.Screen
-        name="Главная"
-        component={MainScreen}
+        name="MapStackNavigator"
+        component={MapStackNavigator}
         options={{
-          tabBarIcon: ({ focused, size, color }) => {
+          tabBarIcon: ({ focused, size }) => {
             return (
               <FontAwesome
                 name={"home"}
@@ -74,21 +74,6 @@ export default function TabNavigator() {
         }}
       />
 
-      <Tab.Screen
-        name="MapStackNavigator"
-        component={MapStackNavigator}
-        options={{
-          tabBarIcon: ({ focused, size }) => {
-            return (
-              <FontAwesome
-                name={"map"}
-                size={(size = focused ? 35 : 25)}
-                color={focused ? "#0090F0" : colors.text}
-              />
-            );
-          },
-        }}
-      />
       <Tab.Screen
         name="ChargingScreen"
         component={ChargingScreen}
@@ -104,6 +89,7 @@ export default function TabNavigator() {
           },
         }}
       />
+
       <Tab.Screen
         name="ProfileStackNavigator"
         component={ProfileStackNavigator}
@@ -114,6 +100,22 @@ export default function TabNavigator() {
                 name={"profile"}
                 size={(size = focused ? 35 : 25)}
                 color={focused ? "#FFEC15" : colors.text}
+              />
+            );
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Главная"
+        component={InfoScreen}
+        options={{
+          tabBarIcon: ({ focused, size, color }) => {
+            return (
+              <FontAwesome
+                name={"question"}
+                size={(size = focused ? 35 : 25)}
+                color={focused ? "#0090F0" : colors.text}
               />
             );
           },

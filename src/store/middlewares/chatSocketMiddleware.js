@@ -2,9 +2,8 @@ import { addStory, addNewMessage, deleteMessages } from "../../store/chatSlice";
 
 export default chatSocketMiddleware =
   (socket) => (storeAPI) => (next) => (action) => {
-    const { dispatch, getState } = storeAPI;
+    const { dispatch } = storeAPI;
     const { type, payload } = action;
-
     switch (type) {
       case "socket/connect":
         socket.connect(payload.url);
@@ -37,7 +36,7 @@ export default chatSocketMiddleware =
               if (data.Success) {
                 console.log("Socket authorized");
               } else {
-                console.error("Authorization failed");
+                console.error("Socket authorization failed");
               }
               break;
             default:
@@ -59,7 +58,7 @@ export default chatSocketMiddleware =
         const newMessage = {
           Id: new Date().getUTCMilliseconds(),
           Action: "SendMessage",
-          Data: JSON.stringify({ Message: payload, ToUserId: 1 }),
+          Data: JSON.stringify({ Message: payload, ToUserId: 3 }),
         };
         socket.send(newMessage);
         break;
@@ -71,14 +70,14 @@ export default chatSocketMiddleware =
     return next(action);
   };
 
-export function socketConnect() {
+export function socketConnect(userPhone) {
   return {
     type: "socket/connect",
     payload: {
       url: "wss://rozetkaweb.ru/chat",
       request: {
         Action: "Authorize",
-        Data: JSON.stringify({ Phone: "79654040987" }),
+        Data: JSON.stringify({ Phone: `${userPhone}` }),
       },
     },
   };

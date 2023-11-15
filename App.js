@@ -35,12 +35,12 @@ export default function App() {
   const { chatConnection } = useSelector((state) => state.chat);
 
   useEffect(() => {
-    if (isAuth) dispatch(socketConnect());
+    if (isAuth && userPhone) dispatch(socketConnect(userPhone));
 
     return () => {
       if (chatConnection) dispatch(socketDisconnect());
     };
-  }, [isAuth]);
+  }, [isAuth, userPhone]);
 
   const [fontsLoaded] = useFonts({
     "Inter-Black": require("./assets/fonts/Inter-Black.ttf"),
@@ -83,6 +83,7 @@ export default function App() {
     }
   };
 
+  // отключение лоадера во всех случаях кроме переключения на зарядную сессию
   useEffect(() => {
     setTimeout(() => {
       if (loaderVisible && !isCharging && activeSocketStatus != 2) {

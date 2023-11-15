@@ -41,7 +41,7 @@ const Item = ({ item, onPress }) => {
             {socketConnectorString}
           </Text>
           <Text style={{ fontFamily: "Inter-Bold", color: colors.text }}>
-            {price}R / kWt * H
+            {price} ₽/кВт * ч
           </Text>
         </View>
       </View>
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
 
     borderColor: "#89BD21",
-    borderWidth: 1,
-    borderRadius: 10,
+    borderWidth: 1.1,
+    borderRadius: 20,
   },
   stationPhoto: {
     width: 250,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   statusBadge: {
     width: 150,
     height: 40,
-    borderRadius: 5,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
   },

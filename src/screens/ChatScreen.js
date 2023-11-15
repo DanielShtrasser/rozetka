@@ -22,11 +22,13 @@ export default function ChatScreen() {
     chatWindow: {
       flex: 2,
       backgroundColor: colors.background,
-      borderRadius: 5,
     },
     message: {
       width: "70%",
-      padding: 15,
+      paddingHorizontal: 15,
+
+      paddingTop: 5,
+      paddingBottom: 15,
       marginVertical: 8,
       borderWidth: 2,
       borderRadius: 5,
@@ -42,7 +44,7 @@ export default function ChatScreen() {
       color: colors.background,
       borderWidth: 1,
       borderColor: "#89BD21",
-      borderRadius: 5,
+      borderRadius: 30,
     },
     btn: {
       padding: 10,
@@ -81,6 +83,9 @@ export default function ChatScreen() {
           },
         ]}
       >
+        <Text style={{ color: colors.text, fontSize: 10 }}>
+          {fromUserId == userId ? "Вы" : "Техподдержка"}
+        </Text>
         <Text
           style={{
             color: colors.text,

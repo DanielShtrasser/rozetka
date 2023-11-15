@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 30,
     height: 40,
     padding: 10,
     backgroundColor: "#fff",
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 30,
   },
   cardBtnTxt: {
     alignSelf: "center",
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "100%",
     backgroundColor: "#89BD21",
-    borderRadius: 5,
+    borderRadius: 30,
   },
   registerBtnTxt: {
     alignSelf: "center",

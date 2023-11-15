@@ -99,7 +99,7 @@ export default function Charging() {
       height: 60,
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: 5,
+      borderRadius: 30,
       backgroundColor: "#CC0605",
     },
   });

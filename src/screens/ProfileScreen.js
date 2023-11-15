@@ -15,14 +15,7 @@ import { useTheme } from "@react-navigation/native";
 import { fetchLogOut } from "../store/authSlice";
 import { removeValue } from "../utils/asyncStorage";
 import currencyFormatter from "../utils/currencyFormatter";
-import openLink from "../utils/openLink";
 import { socketDisconnect } from "../store/middlewares/chatSocketMiddleware";
-
-const offer_web_page_uri = "https://www.rozetkaweb.ru/docs/oferta.pdf";
-const payment_procedure_web_page_uri =
-  "https://www.rozetkaweb.ru/docs/poryadokOplat.pdf";
-const contacts_uri = "https://www.rozetkaweb.ru/docs/contact";
-const services_uri = "https://www.rozetkaweb.ru/Index/services";
 
 export default function ProfileScreen({ navigation }) {
   const { t } = useTranslation();
@@ -38,7 +31,7 @@ export default function ProfileScreen({ navigation }) {
       flex: 1,
       paddingHorizontal: 15,
       paddingVertical: 5,
-      gap: 5,
+      justifyContent: "space-between",
       backgroundColor: colors.background,
     },
 
@@ -62,7 +55,7 @@ export default function ProfileScreen({ navigation }) {
     },
     profileMenu: {
       width: "100%",
-      gap: 5,
+      gap: 10,
       backgroundColor: colors.background,
     },
     profileMenuTxt: {
@@ -76,7 +69,7 @@ export default function ProfileScreen({ navigation }) {
 
       borderWidth: 1,
       borderColor: colors.primary,
-      borderRadius: 5,
+      borderRadius: 30,
     },
 
     btn: {
@@ -87,7 +80,7 @@ export default function ProfileScreen({ navigation }) {
       justifyContent: "center",
 
       backgroundColor: colors.primary,
-      borderRadius: 5,
+      borderRadius: 30,
     },
     btn_txt: {
       color: colors.background,
@@ -124,37 +117,29 @@ export default function ProfileScreen({ navigation }) {
           </View>
         ) : null}
 
-        <ScrollView>
-          <View style={styles.profileMenu}>
-            <Pressable onPress={() => openLink(contacts_uri)}>
-              <Text style={styles.profileMenuTxt}>{t("контакты")}</Text>
-            </Pressable>
+        <View>
+          <ScrollView>
+            <View style={styles.profileMenu}>
+              <Pressable onPress={() => navigation.navigate("ChatScreen")}>
+                <Text style={styles.profileMenuTxt} numberOfLines={10}>
+                  {t("чат")}
+                </Text>
+              </Pressable>
 
-            <Pressable onPress={() => openLink(services_uri)}>
-              <Text style={styles.profileMenuTxt}>{t("описание-услуг")}</Text>
-            </Pressable>
+              <Pressable onPress={() => navigation.navigate("StoryScreen")}>
+                <Text style={styles.profileMenuTxt}>{t("история")}</Text>
+              </Pressable>
 
-            <Pressable onPress={() => openLink(offer_web_page_uri)}>
-              <Text style={styles.profileMenuTxt}>{t("оферта")}</Text>
-            </Pressable>
-
-            <Pressable onPress={() => openLink(payment_procedure_web_page_uri)}>
-              <Text style={styles.profileMenuTxt} numberOfLines={10}>
-                {t("порядок-оплат")}
-              </Text>
-            </Pressable>
-
-            <Pressable onPress={() => navigation.navigate("ChatScreen")}>
-              <Text style={styles.profileMenuTxt} numberOfLines={10}>
-                {t("чат")}
-              </Text>
-            </Pressable>
-
-            <Pressable onPress={() => navigation.navigate("StoryScreen")}>
-              <Text style={styles.profileMenuTxt}>{t("история")}</Text>
-            </Pressable>
-          </View>
-        </ScrollView>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("SettingsScreen");
+                }}
+              >
+                <Text style={styles.profileMenuTxt}>{t("настройки")}</Text>
+              </Pressable>
+            </View>
+          </ScrollView>
+        </View>
 
         <TouchableOpacity onPress={loginClickHandler} style={{ width: "100%" }}>
           <View style={styles.btn}>

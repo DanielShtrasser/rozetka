@@ -45,8 +45,8 @@ export default function SocketScreen() {
       padding: 15,
 
       borderColor: "#89BD21",
-      borderWidth: 1,
-      borderRadius: 10,
+      borderWidth: 1.1,
+      borderRadius: 20,
     },
     status_txt: {
       fontFamily: "Inter-Bold",
@@ -217,7 +217,7 @@ export default function SocketScreen() {
           style={{
             width: "100%",
             backgroundColor: statusColor,
-            borderRadius: 5,
+            borderRadius: 30,
           }}
         >
           <View

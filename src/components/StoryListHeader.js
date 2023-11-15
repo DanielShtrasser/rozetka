@@ -45,6 +45,7 @@ export default function StoryListHeader({
   function monthDecrement() {
     if (story.Status) return;
     if (month === 0) {
+      if (year == 2023) return;
       setYear((year) => year - 1);
       setMonth(11);
       return;
@@ -62,7 +63,10 @@ export default function StoryListHeader({
           marginBottom: 10,
         }}
       >
-        <TouchableOpacity onPress={monthDecrement}>
+        <TouchableOpacity
+          onPress={monthDecrement}
+          style={{ opacity: month === 0 && year === 2023 ? 0.2 : 1 }}
+        >
           <Ionicons name="arrow-back-outline" size={42} color="#89BD21" />
         </TouchableOpacity>
         <View>

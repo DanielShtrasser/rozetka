@@ -83,6 +83,66 @@ export const fetchLogOut = createAsyncThunk(
   }
 );
 
+export const fetchAccDel = createAsyncThunk(
+  "auth/fetchAccDel",
+  async function (phone = "", { rejectWithValue }) {
+    try {
+      const response = await fetch(
+        "https://rozetkaweb.ru/api/user/DeleteAccount",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            MobilePhone: phone,
+          }),
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(JSON.stringify(response));
+      }
+      const user = await response.json();
+      return user;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchUsedConnector = createAsyncThunk(
+  "auth/fetchUsedConnector",
+  async function (connector = " ", { rejectWithValue }) {
+    try {
+      const response = await fetch(
+        "https://rozetkaweb.ru/api/user/setconnector",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Connector: connector,
+          }),
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(JSON.stringify(response));
+      }
+      const user = await response.json();
+      return user;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -97,6 +157,7 @@ const authSlice = createSlice({
     authError: null,
     userStatus: null,
     userError: null,
+    connector: null,
   },
   reducers: {
     IsActiveChargeToggle(state, action) {
@@ -107,10 +168,6 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.pending, (state) => {
-      state.userError = null;
-      state.userStatus = "loading";
-    });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.userError = null;
       state.userStatus = "resolved";
@@ -127,7 +184,7 @@ const authSlice = createSlice({
         state.balance = data?.Balance;
         state.isActiveCharge = data?.IsActiveCharge;
         data?.SocketId ? (state.activeSocketId = data.SocketId) : null;
-        state.userId = data?.UserId;
+        state.userId = data?.Id;
       }
     });
 
@@ -140,20 +197,16 @@ const authSlice = createSlice({
         text1: i18next.t("ошибка_получения_даннных_пользователя"),
       });
     }),
-      builder.addCase(fetchAuth.pending, (state, action) => {
-        state.userError = null;
-        state.userStatus = "loading";
-      });
-    builder.addCase(fetchAuth.fulfilled, (state, action) => {
-      state.authError = null;
-      state.authFetchStatus = "resolved";
+      builder.addCase(fetchAuth.fulfilled, (state, action) => {
+        state.authError = null;
+        state.authFetchStatus = "resolved";
 
-      const res = JSON.parse(action.payload);
-      if (res.Success) {
-        console.log("authentication Success");
-        state.isAuth = true;
-      }
-    });
+        const res = JSON.parse(action.payload);
+        if (res.Success) {
+          console.log("authentication Success");
+          state.isAuth = true;
+        }
+      });
     builder.addCase(fetchAuth.rejected, (state, action) => {
       state.authError = action.payload;
       state.authFetchStatus = "rejected";
@@ -165,28 +218,58 @@ const authSlice = createSlice({
         text2: i18next.t("попробуйте_снова"),
       });
     }),
-      builder.addCase(fetchLogOut.pending, (state, action) => {
-        // state.authError = null;
-        // state.authFetchStatus = "loading";
-      });
-    builder.addCase(fetchLogOut.fulfilled, (state, action) => {
-      // state.authError = null;
-      // state.authFetchStatus = "resolved";
+      builder.addCase(fetchLogOut.fulfilled, (state, action) => {
+        state.authError = null;
+        state.authFetchStatus = "resolved";
 
+        const res = JSON.parse(action.payload);
+        if (res.Success) {
+          state.isAuth = false;
+          state.userStatus = "NotAuthenticated";
+          state.userPhone = 0;
+          state.balance = 0;
+        }
+        console.log("isAuth from fetchLogOut.fulfilled: ", state.isAuth);
+      });
+    builder.addCase(fetchLogOut.rejected, (state, action) => {
+      state.authError = action.payload;
+      state.authFetchStatus = "rejected";
+
+      console.log("fetchLogOut.rejected");
+    });
+
+    builder.addCase(fetchAccDel.fulfilled, (state, action) => {
       const res = JSON.parse(action.payload);
       if (res.Success) {
         state.isAuth = false;
+        state.userId = null;
         state.userStatus = "NotAuthenticated";
         state.userPhone = 0;
         state.balance = 0;
+        state.isActiveCharge = false;
+        state.activeSocketId = null;
+        state.authFetchStatus = null;
+        state.authError = null;
+        state.userStatus = null;
+        state.userError = null;
+        state.connector = null;
       }
-      console.log("isAuth from fetchLogOut.fulfilled: ", state.isAuth);
     });
-    builder.addCase(fetchLogOut.rejected, (state, action) => {
-      // state.authError = action.payload;
-      // state.authFetchStatus = "rejected";
+    builder.addCase(fetchAccDel.rejected, (state, action) => {
+      Toast.show({
+        type: "error",
+        text1: i18next.t("ошибка_удаления_аккаунта"),
+        text2: i18next.t("попробуйте_снова"),
+      });
+      console.log("fetchAccDel.rejected");
+    });
+    builder.addCase(fetchUsedConnector.fulfilled, (state, action) => {
+      const res = JSON.parse(action.payload);
 
-      console.log("fetchLogOut.rejected");
+      if (res.Success) state.connector = res.connector;
+    });
+    builder.addCase(fetchUsedConnector.rejected, (state, action) => {
+      console.log("fetchUsedConnector ERROR");
     });
   },
 });

@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 30,
     height: 40,
     padding: 10,
     backgroundColor: "#ecf0ec",
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   logInBtn: {
     padding: 15,
     backgroundColor: "#89BD21",
-    borderRadius: 5,
+    borderRadius: 30,
   },
   logInBtnTxt: {
     alignSelf: "center",

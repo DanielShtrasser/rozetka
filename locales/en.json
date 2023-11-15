@@ -11,7 +11,7 @@
     "перейти-на-карту-выбрать-станцию-выбрать-розетку": "Go to map - select station - select outlet",
     "где-ознакомиться-с-информацией-по-прошлым-зарядным-сессиям": "Where can I find information about past charging sessions?",
     "перейти-на-страницу-истории": "go to history page",
-    "профиль": "Find out the status of the balance. Link a bank card. Contact the technical service",
+    "профиль": "Find out the status of the balance. Change application settings. Contact the technical service",
     "перейти-на-страницу-профиля": "Go to the profile page",
     "пользователь": "User",
     "баланс": "Balance:",
@@ -59,5 +59,14 @@
     "ошибка_получения_перечня_станций": "ERROR RECEIVING STATION LIST",
     "неудалось_начать_зарядку": "FAILED TO START CHARGING SESSION",
     "неудалось_закончить_зарядку": "FAILED TO END THE CHARGING SESSION",
-    "": ""
+    "Используемый_разъем": "Used connector: ",
+    "язык_интерфейса": "UI language: ",
+    "поменять_цвет_приложения": "Change application color",
+    "удаление_аккаунта": "DELETE ACCOUNT",
+    "ошибка_удаления_аккаунта": "Account deletion error",
+    "хотите_удалить_аккаунт": "Do you want to delete your account?",
+    "да":"Yes",
+    "нет":"No",
+    "":""
+
 }

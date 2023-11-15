@@ -163,14 +163,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   item: {
-    padding: 10,
+    padding: 12,
     marginVertical: 5,
     marginHorizontal: 16,
     gap: 6,
 
     borderColor: "#89BD21",
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 30,
   },
   item_top: {
     flexDirection: "row",
